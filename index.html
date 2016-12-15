@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function Player(option){
+				this.name = option.name;
+				this.profession = option.profession;
+				this.level = option.level;
+				this.race = option.race;
+				this.skill = option.skill;
+				this.property = function(){
+					var pro = {};
+					switch(this.profession){
+						case 0:
+							pro.att = this.level * 5;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 20;
+							pro.spd = this.level * 3;
+							pro.luc = this.level;
+							break;
+						case 1:
+							pro.att = this.level * 6;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 23;
+							pro.spd = this.level * 2;
+							pro.luc = this.level;
+							break;
+						case 2:
+							pro.att = this.level * 5;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 10;
+							pro.spd = this.level * 3;
+							pro.luc = this.level;
+							break;
+						case 3:
+							pro.att = this.level * 5;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 10;
+							pro.spd = this.level * 3;
+							pro.luc = this.level;
+							break;
+						case 4:
+							pro.att = this.level * 5;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 10;
+							pro.spd = this.level * 3;
+							pro.luc = this.level;
+							break;
+						case 5:
+							pro.att = this.level * 5;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 10;
+							pro.spd = this.level * 3;
+							pro.luc = this.level;
+							break;
+						case 6:
+							pro.att = this.level * 5;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 10;
+							pro.spd = this.level * 3;
+							pro.luc = this.level;
+							break;
+						case 7:
+							pro.att = this.level * 5;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 10;
+							pro.spd = this.level * 3;
+							pro.luc = this.level;
+							break;
+						case 8:
+							pro.att = this.level * 5;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 10;
+							pro.spd = this.level * 3;
+							pro.luc = this.level;
+							break;
+						case 9:
+							pro.att = this.level * 5;
+							pro.def = this.level * 2;
+							pro.hp = this.level * 10;
+							pro.spd = this.level * 3;
+							pro.luc = this.level;
+							break;
+						default:
+							console.log("你个傻逼!");
+							break;
+					};
+					return pro;
+				}.call(this);
+				this.nhp = this.property.hp;
+				this.attack = function(aPlayer){
+					console.log(this.name + "打了" + aPlayer.name + "一下,造成了" + (this.property.att - aPlayer.property.def) + "点伤害.");
+					aPlayer.nhp -= this.property.att - aPlayer.property.def;
+					console.log(aPlayer.name + "还剩" + aPlayer.nhp + "点生命.");
+				};
+				this.fightWith = function(aPlayer){
+					this.nhp = this.property.hp;
+					aPlayer.nhp = aPlayer.property.hp;
+					var t = 0;
+					var s1 = parseInt(10000000000/this.property.spd);
+					var s2 = parseInt(10000000000/aPlayer.property.spd);
+					while(this.nhp > 0 && aPlayer.nhp > 0){
+						if(t % s1 == 0){
+							this.attack(aPlayer);
+						};
+						if(t % s2 == 0){
+							aPlayer.attack(this);
+						};
+						t ++;
+					};
+					if(this.nhp <=0 && aPlayer.nhp > 0){
+						console.log(this.name + "被" + aPlayer.name + "打败了.");
+					} else if(this.nhp > 0 && aPlayer.nhp <= 0){
+						console.log(aPlayer.name + "被" + this.name + "打败了.");
+					} else {
+						console.log(this.name + "与" + aPlayer.name + "同归于尽了.");
+					};
+				};
+			};
+			var p1 = new Player({
+				name : "方老师",
+				profession : 0,
+				level : 23,
+				race : "人类",
+				skill : "无",
+			});
+			var p2 = new Player({
+				name : "杨老师",
+				profession : 1,
+				level : 25,
+				race : "人类",
+				skill : "无",
+			});
+			p1.fightWith(p2);
+		</script>
+	</body>
+</html>
